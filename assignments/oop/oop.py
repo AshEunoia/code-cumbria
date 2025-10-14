@@ -30,7 +30,6 @@ section.
 
 import numpy
 
-# There is actually no point in inheriting this...
 class Shape():
   def __init__(self):
     pass
@@ -55,35 +54,35 @@ class Circle(Shape):
 
 class Rectangle(Shape):
   # Only 2 sides need to be given.
-  def __init__(self, side_1: float, side_2: float):
+  def __init__(self, side_0: float, side_1: float):
+    self.side_0 = side_0
     self.side_1 = side_1
-    self.side_2 = side_2
 
   # a + b
   def area(self):
-    return self.side_1 * self.side_2
+    return self.side_0 * self.side_1
 
   # (a + b) * 2
   def perimeter(self):
-    return (self.side_1 + self.side_2) * 2
+    return (self.side_0 + self.side_1) * 2
 
 class Triangle(Shape):
-  def __init__(self, side_1: float, side_2: float, side_3: float):
+  def __init__(self, side_0: float, side_1: float, side_2: float):
     assert not (
-      side_1 > side_2 + side_3 or 
-      side_2 > side_1 + side_3 or 
-      side_3 > side_1 + side_2), "No side of a triangle can be greater than the sum of the other two sides."
+      side_0 > side_1 + side_2 or 
+      side_1 > side_0 + side_2 or 
+      side_2 > side_0 + side_1), "No side of a triangle can be greater than the sum of the other two sides."
 
+    self.side_0 = side_0
     self.side_1 = side_1
     self.side_2 = side_2
-    self.side_3 = side_3
 
   # Based on the numerically stable version of Heron's formula: https://en.wikipedia.org/wiki/Heron%27s_formula?useskin=vector.
   # sqrt((a + (b + c)) * (c - (a - b)) * (c + (a - b)) * (a + (b - c)))/4
   def area(self):
     # Sort descending.
     # I'm not sure this really does anything, but the wiki seems to consider it important!
-    sides = numpy.flip(numpy.sort([self.side_1, self.side_2, self.side_3]))
+    sides = numpy.flip(numpy.sort([self.side_0, self.side_1, self.side_2]))
 
     return(
       numpy.sqrt(
@@ -95,15 +94,14 @@ class Triangle(Shape):
 
   # a + b + c
   def perimeter(self):
-    return self.side_1 + self.side_2 + self.side_3
+    return self.side_0 + self.side_1 + self.side_2
 
 def test_print(shape):
   print(
     "Shape: " + str(type(shape).__name__) + 
-    "\n  area_____: " + 
-    str(shape.area()) + 
-    "\n  perimeter: " + 
-    str(shape.perimeter()))
+    "\n  Properties: " + str(vars(shape)) + 
+    "\n  area_____: " + str(shape.area()) + 
+    "\n  perimeter: " + str(shape.perimeter()))
 
 test_print(Circle(3))
 test_print(Rectangle(5, 2))
