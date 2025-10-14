@@ -82,7 +82,9 @@ class Triangle(Shape):
   def area(self):
     # Sort descending.
     # I'm not sure this really does anything, but the wiki seems to consider it important!
-    sides = [self.side_0, self.side_1, self.side_2].sort().reverse()
+    sides = [self.side_0, self.side_1, self.side_2]
+    sides.sort()
+    sides.reverse()
 
     return(
       math.sqrt(
