@@ -100,8 +100,8 @@ def test_print(shape):
   print(
     "Shape: " + str(type(shape).__name__) + 
     "\n  Properties: " + str(vars(shape)) + 
-    "\n  area_____: " + str(shape.area()) + 
-    "\n  perimeter: " + str(shape.perimeter()))
+    "\n  Area______: " + str(shape.area()) + 
+    "\n  Perimeter_: " + str(shape.perimeter()))
 
 test_print(Circle(3))
 test_print(Rectangle(5, 2))
