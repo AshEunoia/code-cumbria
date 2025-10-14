@@ -28,7 +28,7 @@ Submit a link to the file in your repository on Trainer Central under the OOP As
 section.
 '''
 
-import numpy
+import math
 
 class Shape():
   def __init__(self):
@@ -46,11 +46,11 @@ class Circle(Shape):
 
   # pi * r**2
   def area(self):
-    return numpy.pi * self.radius**2
+    return math.pi * self.radius**2
 
   # 2 * pi * r
   def perimeter(self):
-    return 2 * numpy.pi * self.radius
+    return 2 * math.pi * self.radius
 
 class Rectangle(Shape):
   # Only 2 sides need to be given.
@@ -78,19 +78,19 @@ class Triangle(Shape):
     self.side_2 = side_2
 
   # Based on the numerically stable version of Heron's formula: https://en.wikipedia.org/wiki/Heron%27s_formula?useskin=vector.
-  # sqrt((a + (b + c)) * (c - (a - b)) * (c + (a - b)) * (a + (b - c)))/4
+  # sqrt((a + (b + c)) * (c - (a - b)) * (c + (a - b)) * (a + (b - c))) / 4
   def area(self):
     # Sort descending.
     # I'm not sure this really does anything, but the wiki seems to consider it important!
-    sides = numpy.flip(numpy.sort([self.side_0, self.side_1, self.side_2]))
+    sides = [self.side_0, self.side_1, self.side_2].sort().reverse()
 
     return(
-      numpy.sqrt(
+      math.sqrt(
         (sides[0] + (sides[1] + sides[2])) * 
         (sides[2] - (sides[0] - sides[1])) * 
         (sides[2] + (sides[0] - sides[1])) * 
         (sides[0] + (sides[1] - sides[2]))
-      )/4)
+      ) / 4)
 
   # a + b + c
   def perimeter(self):
@@ -98,9 +98,9 @@ class Triangle(Shape):
 
 def test_print(shape):
   print(
-    "Shape: " + str(type(shape).__name__) + 
-    "\n  Properties: " + str(vars(shape)) + 
-    "\n  Area______: " + str(shape.area()) + 
+    "Shape: " + str(type(shape).__name__) +
+    "\n  Properties: " + str(vars(shape)) +
+    "\n  Area______: " + str(shape.area()) +
     "\n  Perimeter_: " + str(shape.perimeter()))
 
 test_print(Circle(3))
