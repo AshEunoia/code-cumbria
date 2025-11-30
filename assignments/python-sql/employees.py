@@ -122,7 +122,6 @@ def delete_employee() -> None:
 
 
 def database_to_table(employees: Result[Tuple[Employee]]):
-    # FIXME Mypy warning: "By default the bodies of untyped functions are not checked, consider using --check-untyped-defs". After an hour of searching I still don't know which function it's referring to.
     table: List[List[Union[int, str, float]]] = []
     for employee in employees.scalars():
         table += [
@@ -139,8 +138,6 @@ def database_to_table(employees: Result[Tuple[Employee]]):
 
 
 def view_all_employees():
-    # employees = session.query(Employee).order_by(Employee.id.desc()).all()
-
     employees = session.execute(select(Employee).join(Employee.department))
 
     print("\nAll employees sorted by id: ")
