@@ -18,7 +18,6 @@ from sqlalchemy.orm import (
 )
 from typing import List, Union, Tuple
 from tabulate import tabulate
-from collections.abc import Sequence
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -52,22 +51,6 @@ class Employee(Base):
 
 
 Base.metadata.create_all(engine)
-
-# department_hr = Department(name="HR")
-# department_it = Department(name="IT")
-
-# # Insert employee records
-# employee_1 = Employee(
-#     name="Alice", age=30, salary=50000, department=department_hr
-# )
-# employee_2 = Employee(
-#     name="Bob", age=25, salary=60000, department=department_it
-# )
-
-# # Add to session and commit
-# session.add(employee_1)
-# session.add(employee_2)
-# session.commit()
 
 
 def add_department(department: str) -> Department:
